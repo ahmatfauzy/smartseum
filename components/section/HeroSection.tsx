@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="bg-white dark:bg-black transition-colors min-h-[85vh] flex flex-col justify-center">
+    <section className="bg-white dark:bg-black transition-colors h-[50vh] md:min-h-[85vh] flex flex-col justify-center">
       <div className="w-full flex flex-col items-center px-6 md:px-12 lg:px-24">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -21,7 +21,7 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
