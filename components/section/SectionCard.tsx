@@ -13,13 +13,15 @@ const data = [
   {
     image: Lukisan,
     title: "Classic Portraiture",
-    description: "Reimagined views on traditional portrait painting techniques.",
+    description:
+      "Reimagined views on traditional portrait painting techniques.",
     href: "/artwork/classic-portraiture",
   },
   {
     image: Lukisan,
     title: "Nature Silhouette",
-    description: "Finding tranquility in raw organic forms and subtle lighting.",
+    description:
+      "Finding tranquility in raw organic forms and subtle lighting.",
     href: "/artwork/nature-silhouette",
   },
 ];
@@ -42,7 +44,7 @@ const itemVariants = {
 const SectionCard = () => {
   return (
     <section className="w-full py-20 px-6 md:px-12 lg:px-24 bg-white dark:bg-black transition-colors">
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import Barcode from "@/public/assets/qrcode.png";
 
 type Card = {
   image: string | StaticImageData;
@@ -14,6 +15,9 @@ const CardWrapper = ({ image, title, description, href }: Card) => {
       <div className="w-full">
         <div className="relative w-full aspect-square overflow-hidden rounded-md">
           <Image src={image} alt={title} fill className="object-cover" />
+          <div className="absolute bottom-3 right-3 w-30 h-30">
+            <Image src={Barcode} alt="Barcode" fill className="object-cover" />
+          </div>
         </div>
       </div>
 
