@@ -46,7 +46,6 @@ export default function MuseumSection() {
   return (
     <section className="min-h-[90vh] bg-white dark:bg-black text-black dark:text-white transition-colors relative flex items-center py-20 lg:py-32">
       <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative z-10">
-        
         {/* Text Content Area */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -77,7 +76,9 @@ export default function MuseumSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              Masuki dimensi baru dalam mengeksplorasi karya seni melalui maket museum interaktif kami. Visualisasi 3D ini memberikan Anda kebebasan untuk mengamati tata letak galeri secara mendetail.
+              Masuki dimensi baru dalam mengeksplorasi karya seni melalui maket
+              museum interaktif kami. Visualisasi 3D ini memberikan Anda
+              kebebasan untuk mengamati tata letak galeri secara mendetail.
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
@@ -85,7 +86,9 @@ export default function MuseumSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.8 }}
             >
-              Untuk melengkapi pengalaman pengunjung, seluruh pajangan telah diintegrasikan dengan sistem QR Code. Temukan cerita di balik karya hanya dengan pindaian singkat.
+              Untuk melengkapi pengalaman pengunjung, seluruh pajangan telah
+              diintegrasikan dengan sistem QR Code. Temukan cerita di balik
+              karya hanya dengan pindaian singkat.
             </motion.p>
           </div>
 
@@ -97,7 +100,7 @@ export default function MuseumSection() {
             className="pt-6 flex justify-center lg:justify-start"
           >
             <Link
-              href="/qr-simulation"
+              href="/interaction"
               className="group inline-flex items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium px-8 py-3.5"
             >
               Coba Simulasi QR
@@ -128,9 +131,8 @@ export default function MuseumSection() {
               exposure="1"
               min-camera-orbit="auto auto 0m"
               style={{ width: "100%", height: "100%", outline: "none" }}
-            >
-            </model-viewer>
-            
+            ></model-viewer>
+
             {/* Guide overlay */}
             <div className="absolute bottom-4 left-0 w-full flex justify-center pointer-events-none">
               <span className="bg-black/5 dark:bg-white/10 backdrop-blur-sm text-gray-500 dark:text-gray-400 text-xs px-3 py-1.5 rounded-full font-medium tracking-wide">
@@ -139,7 +141,6 @@ export default function MuseumSection() {
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );
