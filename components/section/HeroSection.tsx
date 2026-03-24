@@ -1,39 +1,52 @@
 "use client";
 
 import React from "react";
-import { Home as HouseIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="bg-white dark:bg-black transition-colors h-[50vh] md:min-h-[85vh] flex flex-col justify-center">
-      <div className="w-full flex flex-col items-center px-6 md:px-12 lg:px-24">
+    <section className="bg-transparent transition-colors min-h-[60vh] md:min-h-[90vh] flex flex-col justify-center relative overflow-hidden">
+      <div className="w-full flex flex-col items-center px-4 md:px-12 relative z-10 pt-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-2 mb-12 sm:mb-16"
+          className="flex items-center gap-3 mb-10 sm:mb-14 px-5 py-2.5 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 backdrop-blur-md rounded-full shadow-lg"
         >
-          <HouseIcon className="w-5 h-5 text-black dark:text-white stroke-[2.5]" />
-          <span className="text-sm text-black dark:text-white sm:text-[15px] font-semibold tracking-wide">
-            Dolskaya St., 1, Moscow 115569 Russia
+          <span className="text-[10px] sm:text-xs text-black/60 dark:text-white/70 font-bold tracking-[0.3em] uppercase">
+            The World&apos;s Smartest Museum Experience
           </span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium text-black dark:text-white text-center leading-[1.12] max-w-6xl tracking-tight"
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[10vw] sm:text-6xl md:text-8xl lg:text-9xl font-black text-black dark:text-white text-center leading-[0.85] tracking-tighter max-w-[95vw] lg:max-w-7xl"
         >
-          BEGIN AN EXPLORATION THROUGH
-          <br className="hidden sm:block" />
-          A GALLERY SHOWCASING ARTISAN
-          <br className="hidden sm:block" />
-          CREATIVITY.
+          REIMAGINE{" "}
+          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-emerald-600 to-emerald-700 italic pr-12 mr-[-3rem]">
+            HISTORY&nbsp;
+          </span>
+          <br />
+          IN FULL{" "}
+          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-violet-500 via-purple-600 to-purple-700 italic pr-16 mr-[-4rem]">
+            DIMENSION.&nbsp;
+          </span>
         </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-12 text-gray-500 dark:text-gray-400 text-center max-w-2xl text-base md:text-xl font-light leading-relaxed px-4"
+        >
+          Jembatan antara masa lalu dan masa depan. Temukan keajaiban artefak
+          sejarah melalui teknologi WebAR tercanggih.
+        </motion.p>
       </div>
     </section>
   );

@@ -34,7 +34,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-white text-black font-sans m-0 p-0 antialiased overflow-x-hidden dark:bg-neutral-950 dark:text-white transition-colors">
+      <body suppressHydrationWarning className="min-h-screen bg-white text-black font-sans m-0 p-0 antialiased overflow-x-hidden dark:bg-neutral-950 dark:text-white transition-colors">
         {children}
       </body>
     </html>

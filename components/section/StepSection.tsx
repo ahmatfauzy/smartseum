@@ -16,16 +16,16 @@ const STEPS = [
     title: "Kunjungi SmartSeum",
     description:
       "Buka aplikasi SmartSeum di browser Anda. Temukan koleksi karya seni dan pajangan museum 3D yang telah dikurasi dari berbagai daerah di Indonesia.",
-    color: "from-blue-500 to-cyan-400",
-    bg: "bg-blue-500/10 dark:bg-blue-500/20",
-    border: "border-blue-500/30",
-    iconColor: "text-blue-500",
+    color: "from-emerald-500 to-teal-400",
+    bg: "bg-emerald-500/10 dark:bg-emerald-500/20",
+    border: "border-emerald-500/30",
+    iconColor: "text-emerald-500",
     mockup: <WebMockup />,
   },
   {
     number: "02",
     icon: ScanQrCode,
-    title: "Scan QR Code Lukisan",
+    title: "Scan QR Code Koleksi",
     description:
       "Arahkan kamera ke QR Code yang tertempel di samping setiap pajangan. Dalam hitungan detik, informasi lengkap dan model 3D akan terbuka secara otomatis.",
     color: "from-violet-500 to-purple-500",
@@ -40,10 +40,10 @@ const STEPS = [
     title: "Jelajahi dalam 3D & Pelajari Sejarahnya",
     description:
       "Dialog interaktif menampilkan model 3D karya yang bisa diputar dan di-zoom, disertai narasi sejarah, penjelasan seniman, hingga era pembuatannya.",
-    color: "from-amber-500 to-orange-400",
-    bg: "bg-amber-500/10 dark:bg-amber-500/20",
-    border: "border-amber-500/30",
-    iconColor: "text-amber-500",
+    color: "from-cyan-500 to-blue-400",
+    bg: "bg-cyan-500/10 dark:bg-cyan-500/20",
+    border: "border-cyan-500/30",
+    iconColor: "text-cyan-500",
     mockup: <PopupMockup />,
   },
 ];
@@ -67,7 +67,6 @@ export default function StepSection() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPaused]);
 
   const handleStepClick = (i: number) => {
@@ -80,7 +79,7 @@ export default function StepSection() {
   const step = STEPS[activeStep];
 
   return (
-    <section className="w-full bg-white dark:bg-black transition-colors py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="w-full bg-transparent transition-colors py-24 px-6 md:px-12 lg:px-24 overflow-hidden relative">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -121,7 +120,7 @@ export default function StepSection() {
               >
                 <div className="flex items-start gap-4">
                   <div
-                    className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${isActive ? s.bg : "bg-gray-100 dark:bg-gray-800"} transition-colors`}
+                    className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${isActive ? s.bg : "bg-gray-100 dark:bg-gray-800"} transition-colors`}
                   >
                     <Icon
                       className={`w-5 h-5 ${isActive ? s.iconColor : "text-gray-400 dark:text-gray-500"} transition-colors`}
@@ -157,7 +156,7 @@ export default function StepSection() {
                   </div>
                   {isActive && (
                     <ArrowRight
-                      className={`w-4 h-4 flex-shrink-0 mt-3 ${s.iconColor}`}
+                      className={`w-4 h-4 shrink-0 mt-3 ${s.iconColor}`}
                     />
                   )}
                 </div>
@@ -166,7 +165,7 @@ export default function StepSection() {
                   <div className="mt-4 h-0.5 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden">
                     <motion.div
                       key={`bar-${i}`}
-                      className={`h-full bg-gradient-to-r ${s.color} rounded-full`}
+                      className={`h-full bg-linear-to-r ${s.color} rounded-full`}
                       initial={{ width: "0%" }}
                       animate={{ width: "100%" }}
                       transition={{
@@ -320,16 +319,16 @@ function PopupMockup() {
         </div>
 
         {/* 3D model placeholder (spinning box illusion) */}
-        <div className="w-full h-40 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/20 flex items-center justify-center relative overflow-hidden">
+        <div className="w-full h-40 rounded-xl bg-linear-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/20 flex items-center justify-center relative overflow-hidden">
           <motion.div
-            className="w-20 h-20 border-2 border-amber-400 relative"
+            className="w-20 h-20 border-2 border-emerald-400 relative"
             style={{ transformStyle: "preserve-3d" }}
             animate={{ rotateY: 360, rotateX: 15 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute inset-0 border-2 border-amber-300/50 rotate-45" />
+            <div className="absolute inset-0 border-2 border-emerald-300/50 rotate-45" />
           </motion.div>
-          <div className="absolute bottom-2 text-center w-full text-amber-400 text-xs opacity-60 tracking-wider">
+          <div className="absolute bottom-2 text-center w-full text-emerald-400 text-xs opacity-60 tracking-wider">
             Model 3D Interaktif
           </div>
         </div>
@@ -345,7 +344,7 @@ function PopupMockup() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1 + 0.3 }}
               >
-                <div className="h-2 w-2 rounded-full bg-amber-400 flex-shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-emerald-400 shrink-0" />
                 <div className="flex justify-between w-full">
                   <span className="text-xs text-gray-400 dark:text-gray-500">
                     {label}
@@ -359,7 +358,7 @@ function PopupMockup() {
 
         {/* CTA button */}
         <motion.div
-          className="w-full h-10 rounded-full bg-gradient-to-r from-amber-500 to-orange-400 flex items-center justify-center text-white text-sm font-medium gap-2"
+          className="w-full h-10 rounded-full bg-linear-to-r from-emerald-500 to-teal-400 flex items-center justify-center text-white text-sm font-medium gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}

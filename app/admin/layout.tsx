@@ -1,23 +1,25 @@
-"use client";
+/**
+ * Admin Layout (Server Component)
+ *
+ * Responsibilities:
+ *  - Server-side session guard (belt-and-suspenders on top of middleware)
+ *  - Render the sidebar + topbar shell
+ *
+ * The actual sidebar/topbar are Client Components imported via the
+ * AdminShell wrapper so we can keep useState there.
+ */
 
-import { useState } from "react";
-import { AdminSidebar, AdminTopbar } from "@/components/admin/AdminNav";
+import { auth } from "@/lib/auth";
+import { AdminShell } from "@/components/admin/AdminShell";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+export default async function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await auth();
 
-  return (
-    <div className="flex h-screen bg-neutral-100 dark:bg-[#0d0d0d] text-neutral-900 dark:text-white font-sans overflow-hidden transition-colors">
-      <AdminSidebar open={sidebarOpen} />
-      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        <AdminTopbar
-          sidebarOpen={sidebarOpen}
-          onToggleSidebar={() => setSidebarOpen((p) => !p)}
-        />
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
-      </div>
-    </div>
-  );
+  // Pass down the user data to the client component shell
+  return <AdminShell user={session?.user || null}>{children}</AdminShell>;
 }
+

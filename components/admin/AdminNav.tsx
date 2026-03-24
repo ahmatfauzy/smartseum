@@ -135,18 +135,26 @@ export function AdminSidebar({ open }: SidebarProps) {
 
 /* ─── Top Bar ─── */
 
+import { signOut } from "next-auth/react";
+
 interface TopbarProps {
+  user?: any;
   sidebarOpen: boolean;
   onToggleSidebar: () => void;
 }
 
-export function AdminTopbar({ sidebarOpen, onToggleSidebar }: TopbarProps) {
+export function AdminTopbar({ user, sidebarOpen, onToggleSidebar }: TopbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const currentPage = NAV_ITEMS.find(
     (n) => pathname === n.href || pathname.startsWith(n.href + "/")
   );
+
+  const userInitials = user?.name
+    ? user.name.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2)
+    : "A";
 
   return (
     <>
@@ -186,9 +194,50 @@ export function AdminTopbar({ sidebarOpen, onToggleSidebar }: TopbarProps) {
           {/* Theme toggler */}
           <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center rounded-lg !p-0 hover:!bg-white/8 dark:hover:!bg-white/8 transition-all [&_svg]:w-4 [&_svg]:h-4" />
 
-          {/* Avatar */}
-          <div className="w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center select-none">
-            A
+          {/* Avatar Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setProfileOpen((p) => !p)}
+              className="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center select-none overflow-hidden border-2 border-transparent hover:border-blue-200 dark:hover:border-blue-500/30 transition-all"
+            >
+              {user?.image ? (
+                <img src={user.image} alt="User Avatar" className="w-full h-full object-cover" />
+              ) : (
+                userInitials
+              )}
+            </button>
+
+            {/* Dropdown Menu */}
+            {profileOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setProfileOpen(false)}
+                />
+                <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-[#1e1e1e] border border-neutral-200 dark:border-white/10 rounded-2xl shadow-xl z-50 overflow-hidden animate-in slide-in-from-top-2 duration-150">
+                  <div className="p-3 border-b border-neutral-100 dark:border-white/5">
+                    <p className="text-sm font-semibold text-neutral-900 dark:text-white truncate">
+                      {user?.name || "Admin"}
+                    </p>
+                    <p className="text-xs text-neutral-500 dark:text-white/40 truncate mt-0.5">
+                      {user?.email || "admin@smartseum.id"}
+                    </p>
+                    <div className="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-600 bg-emerald-100 border border-emerald-200 dark:text-emerald-400 dark:bg-emerald-400/10 dark:border-emerald-400/20">
+                      {user?.role || "ADMIN"}
+                    </div>
+                  </div>
+                  <div className="p-1">
+                    <button
+                      onClick={() => signOut({ callbackUrl: "/admin/login" })}
+                      className="w-full text-left flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-xl hover:bg-neutral-100 dark:text-red-400 dark:hover:bg-white/5 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Keluar
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>

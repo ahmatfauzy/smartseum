@@ -17,3 +17,54 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+    const body = await req.json();
+    const { title, description } = body;
+
+    const updateData: any = {};
+    if (title !== undefined) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+
+    if (Object.keys(updateData).length === 0) {
+      return NextResponse.json({ error: "No fields to update" }, { status: 400 });
+    }
+
+    updateData.updatedAt = new Date();
+
+    const updated = await db
+      .update(items)
+      .set(updateData)
+      .where(eq(items.id, id))
+      .returning();
+
+    if (updated.length === 0) {
+      return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, item: updated[0] });
+  } catch (error: any) {
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+
+    // Here we just delete from the database. 
+    // In a production app, we would also parse the Cloudinary URLs and delete the assets via Cloudinary SDK.
+    const deleted = await db.delete(items).where(eq(items.id, id)).returning();
+
+    if (deleted.length === 0) {
+      return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, item: deleted[0] });
+  } catch (error: any) {
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
