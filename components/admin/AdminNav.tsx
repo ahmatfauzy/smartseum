@@ -6,9 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   QrCode,
-  MonitorPlay,
   Users,
-  Layers,
   LogOut,
   Menu,
   X,
@@ -122,7 +120,7 @@ export function AdminSidebar({ open }: SidebarProps) {
               open ? "px-3 gap-3" : "justify-center px-0",
             ].join(" ")}
           >
-            <LogOut className="w-[18px] h-[18px] flex-shrink-0" />
+            <LogOut className="w-[18px] h-[18px] shrink-0" />
             {open && <span className="truncate">Kembali ke Site</span>}
           </Link>
           {!open && (
